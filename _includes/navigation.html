@@ -6,22 +6,20 @@
       aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse d-flex align-items-center" id="navbarResponsive">
-      <ul class="navbar-nav ml-auto d-flex align-items-center">
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
         {% for item in site.data.menu %}
         <li class="nav-item{% if item.link == page.url %} active {% endif %}">
-          <a class="nav-link" href="{{ site.baseurl }}{{ item.link }}">{{ item.title }}</a>
+          <a class="nav-link" href="{{ site.baseurl }}{{ item.link }}">{{
+            item.title
+            }}</a>
         </li>
         {% endfor %}
-      </ul>
-      <div class="ml-3 d-none d-lg-block d-flex align-items-center">
-        <script async src="https://hits.link/js/hits.js"></script>
-        <a href="https://hits.seeyoufarm.com">
-          <img
-            src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fjacobinis.github.io&count_bg=%233CB371&title_bg=%233CB371&icon=mariadb.svg&icon_color=%23FFFFFF&title=Welcome&edge_flat=false"
-            alt="Hits Counter" />
+        
+        <a class="visitor-counter d-flex align-items-center" href="https://hits.seeyoufarm.com">
+          <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fjacobinis.github.io&count_bg=%233CB371&title_bg=%233CB371&icon=mariadb.svg&icon_color=%23FFFFFF&title=Welcome&edge_flat=false"/>
         </a>
-      </div>
+      </ul>
     </div>
   </div>
 </nav>
