@@ -54,13 +54,11 @@
     body {
         margin: 0;
         overflow: auto;
-        position: relative;
     }
 
     canvas {
         display: block;
         margin: 0 auto;
-        width: 100vw;
         height: 100vh;
         border: thin solid black;
     }
@@ -93,7 +91,38 @@
 <script type="text/javascript">
 
     // NOTE: Originally 640x1000. Other possible sizes: 512x800, 400x625
-    var game = new Phaser.Game(400, 625, Phaser.CANVAS, '', { preload: preload, create: create, update: update });
+    // var game = new Phaser.Game(400, 625, Phaser.CANVAS, '', { preload: preload, create: create, update: update });
+
+    var game;
+    var gameWidth = 400;
+    var gameHeight = 625;
+
+    function initGame() {
+        game = new Phaser.Game(gameWidth, gameHeight, Phaser.CANVAS, '', { preload: preload, create: create, update: update });
+
+        // Ensure canvas resizes proportionally
+        function resizeGame() {
+            var canvas = game.canvas;
+            var aspectRatio = gameWidth / gameHeight;
+            var width = window.innerWidth;
+            var height = window.innerHeight;
+
+            if (width / height > aspectRatio) {
+                width = height * aspectRatio;
+            } else {
+                height = width / aspectRatio;
+            }
+
+            game.width = width;
+            game.height = height;
+            canvas.style.width = width + 'px';
+            canvas.style.height = height + 'px';
+        }
+
+        window.addEventListener('resize', resizeGame);
+        resizeGame(); // Initial resize
+    }
+
 
     function preload() {
         game.load.image('ball', 'https://github.com/jacobinis/jacobinis.github.io/blob/main/assets/image/ball.png?raw=true');
@@ -283,6 +312,8 @@
             whoosh.play();
         }
     }
+
+    initGame();
 </script>
     </div>
     <!-- /.container -->
