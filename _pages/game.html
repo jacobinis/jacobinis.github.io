@@ -5,8 +5,11 @@ permalink: /game/
 ---
 
 <style type="text/css">
-    body {
+    html, body {
+        height: 100%;
         margin: 0;
+        overflow: hidden; /* Prevents scrolling */
+        font-size: 16px; /* Adjust font size for better mobile view */
     }
 
     canvas {
@@ -18,8 +21,9 @@ permalink: /game/
     span {
         display: block;
         margin: 30px auto;
-        width: 500px;
+        width: 100%;
         text-align: center;
+        box-sizing: border-box;
     }
 
     h1 {
@@ -28,12 +32,15 @@ permalink: /game/
     }
 
     #content-wrapper {
+        height: 100%;
+        overflow: auto;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
     }
 </style>
+
 
 <h1>Basketball Game</h1>
 

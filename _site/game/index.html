@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
   <meta name="description" content="A business home page starter template for Bootstrap 4 featuring marketing boxes and a full width image header." />
   <meta name="author" content="" />
   <link rel="icon" href="../assets/image/icon.png">
@@ -50,8 +51,11 @@
     <!-- Page Content -->
     <div class="container mb-5">
         <style type="text/css">
-    body {
+    html, body {
+        height: 100%;
         margin: 0;
+        overflow: hidden; /* Prevents scrolling */
+        font-size: 16px; /* Adjust font size for better mobile view */
     }
 
     canvas {
@@ -63,8 +67,9 @@
     span {
         display: block;
         margin: 30px auto;
-        width: 500px;
+        width: 100%;
         text-align: center;
+        box-sizing: border-box;
     }
 
     h1 {
@@ -73,12 +78,15 @@
     }
 
     #content-wrapper {
+        height: 100%;
+        overflow: auto;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
     }
 </style>
+
 
 <h1>Basketball Game</h1>
 
