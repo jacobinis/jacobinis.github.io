@@ -5,13 +5,26 @@ permalink: /game/
 ---
 
 <style type="text/css">
+    html,
     body {
+        height: 100%;
+        /* Full height of the viewport */
+        overflow: auto;
+        /* Allow scrolling */
         margin: 0;
+    }
+
+    body {
+        position: relative;
+        /* Ensure body positioning is relative to its parent */
     }
 
     canvas {
         display: block;
-        margin: 0 auto;
+        width: 100vw;
+        /* Full width of the viewport */
+        height: 100vh;
+        /* Full height of the viewport */
         border: thin solid black;
     }
 
