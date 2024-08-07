@@ -5,11 +5,9 @@ permalink: /game/
 ---
 
 <style type="text/css">
-    html, body {
-        height: 100%;
+    body {
         margin: 0;
-        overflow: hidden; /* Prevents scrolling */
-        font-size: 16px; /* Adjust font size for better mobile view */
+        overflow: hidden;
     }
 
     canvas {
@@ -21,9 +19,8 @@ permalink: /game/
     span {
         display: block;
         margin: 30px auto;
-        width: 100%;
+        width: 500px;
         text-align: center;
-        box-sizing: border-box;
     }
 
     h1 {
@@ -32,20 +29,35 @@ permalink: /game/
     }
 
     #content-wrapper {
-        height: 100%;
-        overflow: auto;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        height: 100vh;
+        /* Full height of the viewport */
+        overflow: auto;
+        /* Allow scrolling */
     }
 </style>
-
 
 <h1>Basketball Game</h1>
 
 <script type="text/javascript" src="../assets/js/phaser.min.js"></script>
 <script type="text/javascript">
+    function resizeGame() {
+        var canvas = document.querySelector('canvas');
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+
+        // Adjust game dimensions based on viewport size
+        game.width = width;
+        game.height = height;
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+    }
+
+    window.addEventListener('resize', resizeGame);
+
     // NOTE: Originally 640x1000. Other possible sizes: 512x800, 400x625
     var game = new Phaser.Game(400, 625, Phaser.CANVAS, '', { preload: preload, create: create, update: update });
 
