@@ -53,7 +53,7 @@
         <style type="text/css">
     body {
         margin: 0;
-        overflow: hidden;
+        overflow: auto;
     }
 
     canvas {
@@ -65,7 +65,7 @@
     span {
         display: block;
         margin: 30px auto;
-        width: 500px;
+        width: 100%;
         text-align: center;
     }
 
@@ -79,10 +79,8 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 100vh;
-        /* Full height of the viewport */
+        height: 100%;
         overflow: auto;
-        /* Allow scrolling */
     }
 </style>
 
@@ -90,19 +88,6 @@
 
 <script type="text/javascript" src="../assets/js/phaser.min.js"></script>
 <script type="text/javascript">
-    function resizeGame() {
-        var canvas = document.querySelector('canvas');
-        var width = window.innerWidth;
-        var height = window.innerHeight;
-
-        // Adjust game dimensions based on viewport size
-        game.width = width;
-        game.height = height;
-        canvas.style.width = width + 'px';
-        canvas.style.height = height + 'px';
-    }
-
-    window.addEventListener('resize', resizeGame);
 
     // NOTE: Originally 640x1000. Other possible sizes: 512x800, 400x625
     var game = new Phaser.Game(400, 625, Phaser.CANVAS, '', { preload: preload, create: create, update: update });
