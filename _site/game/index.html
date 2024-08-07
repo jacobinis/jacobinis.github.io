@@ -16,26 +16,54 @@
   <link href="/assets/css/main.css" rel="stylesheet" />
 </head>
 
-<style>
+<body>
+    <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand js-scroll-trigger" href="/">jacobinis</a>
+    <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+      aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        
+        <li class="nav-item">
+          <a class="nav-link" href="/about/">About</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="/contact/">Contact</a>
+        </li>
+        
+        <li class="nav-item active ">
+          <a class="nav-link" href="/game/">Game</a>
+        </li>
+        
+        
+        <a class="visitor-counter d-flex align-items-center" href="https://hits.seeyoufarm.com">
+          <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fjacobinis.github.io&count_bg=%233CB371&title_bg=%233CB371&icon=mariadb.svg&icon_color=%23FFFFFF&title=Welcome&edge_flat=false"/>
+        </a>
+      </ul>
+    </div>
+  </div>
+</nav>
+    <!-- Page Content -->
+    <style>
+    h1 {
+        text-align: center;
+    }
     canvas {
+        width: 100%;
+        height: 100%;
         display: block;
         margin: 0 auto;
         border: thin solid black;
     }
 
-    span {
-        display: block;
-        margin: 30px auto;
-        width: 100%;
-        text-align: center;
-    }
-
-    h1 {
-        margin-top: 3vh;
-        text-align: center;
-    }
-
     #content-wrapper {
+        width: 100%;
+        height: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -43,44 +71,9 @@
     }
 </style>
 
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="/">jacobinis</a>
-            <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    
-                    <li class="nav-item">
-                        <a class="nav-link" href="/about/">About</a>
-                    </li>
-                    
-                    <li class="nav-item">
-                        <a class="nav-link" href="/contact/">Contact</a>
-                    </li>
-                    
-                    <li class="nav-item active ">
-                        <a class="nav-link" href="/game/">Game</a>
-                    </li>
-                    
+<h1>Basketball Game</h1>
 
-                    <a class="visitor-counter d-flex align-items-center" href="https://hits.seeyoufarm.com">
-                        <img
-                            src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fjacobinis.github.io&count_bg=%233CB371&title_bg=%233CB371&icon=mariadb.svg&icon_color=%23FFFFFF&title=Welcome&edge_flat=false" />
-                    </a>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <!-- Page Content -->
-    <!--  -->
-
-    <h1>Basketball Game</h1>
-
-    <script type="text/javascript" src="../assets/js/phaser.min.js"></script>
+<script type="text/javascript" src="../assets/js/phaser.min.js"></script>
     <script type="text/javascript">
         // NOTE: Originally 640x1000. Other possible sizes: 512x800, 400x625
         var game = new Phaser.Game(400, 625, Phaser.CANVAS, '', { preload: preload, create: create, update: update });
@@ -279,6 +272,7 @@
     <!-- Bootstrap core JavaScript -->
     <script src="/assets/vendor/jquery/jquery.min.js"></script>
     <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    
 </body>
 
 </html>
