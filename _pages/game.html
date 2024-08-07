@@ -10,25 +10,40 @@ permalink: /game/
     }
 
     canvas {
+        display: block;
         margin: 0 auto;
         border: thin solid black;
     }
 
     span {
         display: block;
-        margin: 30px auto;
+        margin: 10px auto;
         width: 500px;
         text-align: center;
     }
 
     h1 {
-        margin-top: 3vh;
+        margin-top: 1vh;
         text-align: center;
     }
-    
+
+    #content-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        /* height: 0px; */
+        text-align: center;
+    }
 </style>
 
-<h1> Basketball Game</h1>
+<h1>Basketball Game</h1>    
 
 <script type="text/javascript" src="../assets/js/phaser.min.js"></script>
 <script type="text/javascript">
@@ -36,66 +51,39 @@ permalink: /game/
     var game = new Phaser.Game(400, 625, Phaser.CANVAS, '', { preload: preload, create: create, update: update });
 
     function preload() {
+        game.load.image('ball', 'https://github.com/jacobinis/jacobinis.github.io/blob/main/assets/image/ball.png?raw=true');
+        game.load.image('hoop', 'https://github.com/jacobinis/jacobinis.github.io/blob/main/assets/image/hoop.png?raw=true');
+        game.load.image('side rim', 'https://github.com/jacobinis/jacobinis.github.io/blob/main/assets/image/side_rim.png?raw=true');
+        game.load.image('front rim', 'https://github.com/jacobinis/jacobinis.github.io/blob/main/assets/image/front_rim.png?raw=true');
 
-        game.load.image('ball', '/assets/images/ball.png');
-        game.load.image('hoop', '../assets/images/hoop.png');
-        game.load.image('side rim', '../assets/images/side_rim.png');
-        game.load.image('front rim', '../assets/images/front_rim.png');
-
-        game.load.image('win0', '../assets/images/win0.png');
-        game.load.image('win1', '../assets/images/win1.png');
-        game.load.image('win2', '../assets/images/win2.png');
-        game.load.image('win3', '../assets/images/win3.png');
-        game.load.image('win4', '../assets/images/win4.png');
-        game.load.image('lose0', '../assets/images/lose0.png');
-        game.load.image('lose1', '../assets/images/lose1.png');
-        game.load.image('lose2', '../assets/images/lose2.png');
-        game.load.image('lose3', '../assets/images/lose3.png');
-        game.load.image('lose4', '../assets/images/lose4.png');
+        game.load.image('win0', 'https://github.com/jacobinis/jacobinis.github.io/blob/main/assets/image/win0.png?raw=true');
+        game.load.image('win1', 'https://github.com/jacobinis/jacobinis.github.io/blob/main/assets/image/win1.png?raw=true');
+        game.load.image('win2', 'https://github.com/jacobinis/jacobinis.github.io/blob/main/assets/image/win2.png?raw=true');
+        game.load.image('win3', 'https://github.com/jacobinis/jacobinis.github.io/blob/main/assets/image/win3.png?raw=true');
+        game.load.image('win4', 'https://github.com/jacobinis/jacobinis.github.io/blob/main/assets/image/win4.png?raw=true');
+        game.load.image('lose0', 'https://github.com/jacobinis/jacobinis.github.io/blob/main/assets/image/lose0.png?raw=true');
+        game.load.image('lose1', 'https://github.com/jacobinis/jacobinis.github.io/blob/main/assets/image/lose1.png?raw=true');
+        game.load.image('lose2', 'https://github.com/jacobinis/jacobinis.github.io/blob/main/assets/image/lose2.png?raw=true');
+        game.load.image('lose3', 'https://github.com/jacobinis/jacobinis.github.io/blob/main/assets/image/lose3.png?raw=true');
+        game.load.image('lose4', 'https://github.com/jacobinis/jacobinis.github.io/blob/main/assets/image/lose4.png?raw=true');
 
         game.load.audio('score', '../assets/audio/score.wav');
         game.load.audio('backboard', '../assets/audio/backboard.wav');
         game.load.audio('whoosh', '../assets/audio/whoosh.wav');
         game.load.audio('fail', '../assets/audio/fail.wav');
         game.load.audio('spawn', '../assets/audio/spawn.wav');
-
     }
 
-    var hoop,
-        left_rim,
-        right_rim,
-        ball,
-        front_rim,
-        current_score = 0,
-        current_score_text,
-        high_score = 0,
-        high_score_text,
-        current_best_text;
-
-    var score_sound,
-        backboard,
-        whoosh,
-        fail,
-        spawn;
-
-    var moveInTween,
-        fadeInTween,
-        moveOutTween,
-        fadeOutTween,
-        emoji,
-        emojiName;
-
+    var hoop, left_rim, right_rim, ball, front_rim, current_score = 0, current_score_text, high_score = 0, high_score_text, current_best_text;
+    var score_sound, backboard, whoosh, fail, spawn;
+    var moveInTween, fadeInTween, moveOutTween, fadeOutTween, emoji, emojiName;
     var collisionGroup;
 
     function create() {
-
         game.physics.startSystem(Phaser.Physics.P2JS);
-
         game.physics.p2.setImpactEvents(true);
-
         game.physics.p2.restitution = 0.63;
         game.physics.p2.gravity.y = 0;
-
         collisionGroup = game.physics.p2.createCollisionGroup();
 
         score_sound = game.add.audio('score');
@@ -107,18 +95,15 @@ permalink: /game/
         spawn = game.add.audio('spawn');
 
         game.stage.backgroundColor = "#ffffff";
+        current_score_text = game.add.text(187, 312, '', { font: 'Arial', fontSize: '40px', fill: '#000', align: 'center' });
+        current_best_text = game.add.text(143, 281, '', { font: 'Arial', fontSize: '20px', fill: '#000', align: 'center' });
+        current_best_score_text = game.add.text(187, 312, '', { font: 'Arial', fontSize: '40px', fill: '#00e6e6', align: 'center' });
 
-        // high_score_text = game.add.text(450, 25, 'High Score\n' + high_score, { font: 'Arial', fontSize: '32px', fill: '#000', align: 'center' });
-        current_score_text = game.add.text(187, 312, '', { font: 'Arial', fontSize: '40px', fill: '#000', align: 'center' }); // 300, 500
-        current_best_text = game.add.text(143, 281, '', { font: 'Arial', fontSize: '20px', fill: '#000', align: 'center' });// 230, 450
-        current_best_score_text = game.add.text(187, 312, '', { font: 'Arial', fontSize: '40px', fill: '#00e6e6', align: 'center' }); // 300, 500
-
-        hoop = game.add.sprite(88, 62, 'hoop'); // 141, 100
-        left_rim = game.add.sprite(150, 184, 'side rim'); // 241, 296
-        right_rim = game.add.sprite(249, 184, 'side rim'); // 398, 296
+        hoop = game.add.sprite(88, 62, 'hoop');
+        left_rim = game.add.sprite(150, 184, 'side rim');
+        right_rim = game.add.sprite(249, 184, 'side rim');
 
         game.physics.p2.enable([left_rim, right_rim], false);
-
         left_rim.body.setCircle(2.5);
         left_rim.body.static = true;
         left_rim.body.setCollisionGroup(collisionGroup);
@@ -132,10 +117,8 @@ permalink: /game/
         createBall();
 
         cursors = game.input.keyboard.createCursorKeys();
-
         game.input.onDown.add(click, this);
         game.input.onUp.add(release, this);
-
 
         var instructions = document.createElement("span");
         instructions.innerHTML = "Instructions: Quickly drag the ball to shoot the ball into the hoop!";
@@ -143,7 +126,6 @@ permalink: /game/
     }
 
     function update() {
-
         if (ball && ball.body.velocity.y > 0) {
             front_rim = game.add.sprite(148, 182, 'front rim');
             ball.body.collides([collisionGroup], hitRim, this);
@@ -163,7 +145,6 @@ permalink: /game/
                 fail.play();
                 if (current_score > high_score) {
                     high_score = current_score;
-                    // 	high_score_text.text = 'High Score\n' + high_score;
                 }
                 current_score = 0;
                 current_score_text.text = '';
@@ -182,7 +163,6 @@ permalink: /game/
             ball.kill();
             createBall();
         }
-
     }
 
     function tweenOut() {
@@ -194,13 +174,10 @@ permalink: /game/
     }
 
     function hitRim() {
-
         backboard.play();
-
     }
 
     function createBall() {
-
         var xpos;
         if (current_score === 0) {
             xpos = 200;
@@ -211,10 +188,9 @@ permalink: /game/
         ball = game.add.sprite(xpos, 547, 'ball');
         game.add.tween(ball.scale).from({ x: 0.7, y: 0.7 }, 100, Phaser.Easing.Linear.None, true, 0, 0, false);
         game.physics.p2.enable(ball, false);
-        ball.body.setCircle(60); // NOTE: Goes from 60 to 36
+        ball.body.setCircle(60);
         ball.launched = false;
         ball.isBelowHoop = false;
-
     }
 
     var location_interval;
@@ -223,7 +199,6 @@ permalink: /game/
     var end_location;
 
     function click(pointer) {
-
         var bodies = game.physics.p2.hitTest(pointer.position, [ball.body]);
         if (bodies.length) {
             start_location = [pointer.x, pointer.y];
@@ -232,11 +207,9 @@ permalink: /game/
                 start_location = [pointer.x, pointer.y];
             }.bind(this), 200);
         }
-
     }
 
     function release(pointer) {
-
         if (isDown) {
             window.clearInterval(location_interval);
             isDown = false;
@@ -248,11 +221,9 @@ permalink: /game/
                 launch(x_traj);
             }
         }
-
     }
 
     function launch(x_traj) {
-
         if (ball.launched === false) {
             ball.body.setCircle(36);
             ball.body.setCollisionGroup(collisionGroup);
@@ -266,7 +237,5 @@ permalink: /game/
             ball.body.rotateRight(x_traj / 3);
             whoosh.play();
         }
-
     }
-
 </script>
